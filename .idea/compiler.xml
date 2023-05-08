@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="academy_management_system" />
+        <module name="hunan-industry-polytechnic" />
       </profile>
     </annotationProcessing>
   </component>
