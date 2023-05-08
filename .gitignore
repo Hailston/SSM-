@@ -1,18 +1,68 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+######################################################################
+# 1. Build Tools
 
-# Other files and folders
-.settings/
+### gradle ###
+.gradle
+/build/
+!gradle/wrapper/gradle-wrapper.jar
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
+### maven ####
+.mvn
+mvnw
+mvnw.cmd
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+######################################################################
+# 2. IDE
+
+### STS ############
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### JRebel ##########
+rebel.xml
+
+### NetBeans ########
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+### VS Code #########
+.vscode/
+
+### Hbuilder ########
+.hbuilderx
+
+######################################################################
+# 3. Others
+
+### log #############
+logs/
+*.log
+*.log.*.gz
+*.log.*.tmp
+
+### node_modules ####
+/mcsx-admin/node_modules/
+/mcsx-app/node_modules/
+
+### others ##########
+*.xml.versionsBackup
+*.swp
+HELP.md
