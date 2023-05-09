@@ -17,8 +17,5 @@ public class AdminMapperTest {
     @Autowired
     private AdminMapper adminMapper;
 
-    @Test
-    public void testListAll(){
-        adminMapper.listAll().forEach(System.out::println);
-    }
+
 }

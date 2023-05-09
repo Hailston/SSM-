@@ -69,6 +69,12 @@
             <artifactId>pagehelper</artifactId>
             <version>4.1.0</version>
         </dependency>
+        <!--        excle-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>3.3.1</version>
+        </dependency>
         <!--        test-->
         <dependency>
             <groupId>org.springframework</groupId>
