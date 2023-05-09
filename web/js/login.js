@@ -42,11 +42,12 @@ $(function () {
 			$('#password').focus();
 		} else {
 			$.ajax({
-				url : 'login',
+				url : '/login',
 				type : 'post',
 				data : {
 					"username" : $('#manager').val(),
 					"password" : $('#password').val(),
+					"identify" : $('input:radio:checked').val()
 				},
 				beforeSend : function () {
 					$.messager.progress({
@@ -57,7 +58,7 @@ $(function () {
 					$.messager.progress('close');  
 					var obj = eval(data);
 					if (obj.success) {
-						location.href = 'main.jsp';
+						location.href = obj.addr;
 					} else {
 						$.messager.alert('登录失败！', obj.msg, 'warning', function () {
 							$('#password').select();

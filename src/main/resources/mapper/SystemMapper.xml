@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hngy.mapper.SystemMapper">
+    <!--    Admin loginAdmin(@Param("username") String username, @Param("password") String password);-->
+    <select id="loginAdmin" resultType="admin">
+        select * from admin where username=#{username} and password=#{password}
+    </select>
+    <!--    Student loginStudent(@Param("username") String username, @Param("password") String password);-->
+    <select id="loginStudent" resultType="student">
+        select * from t_student where studentNumber=#{username} and password=#{password}
+    </select>
+    <!--    Teacher loginTeacher(@Param("username") String username, @Param("password") String password);-->
+    <select id="loginTeacher" resultType="teacher">
+        select * from t_teacher where teacherNumber=#{username} and password=#{password}
+    </select>
+</mapper>
