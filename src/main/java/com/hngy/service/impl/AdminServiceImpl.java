@@ -1,6 +1,11 @@
 package com.hngy.service.impl;
 
+import com.hngy.exception.StudentException;
+import com.hngy.mapper.StudentMapper;
+import com.hngy.model.Student;
 import com.hngy.service.AdminService;
+import com.hngy.vo.ResultVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,4 +15,19 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 public class AdminServiceImpl implements AdminService {
+
+    @Autowired
+    private StudentMapper studentMapper;
+
+    @Override
+    public ResultVO<?> addStudent(Student student) {
+        try {
+            studentMapper.addStudent(student);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new StudentException("添加失败!");
+        }
+        return ResultVO.ok("添加成功");
+    }
+
 }

@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 
 public interface StudentMapper {
 	/*添加学生信息信息*/
-	void addStudent(Student student) throws Exception;
+	void addStudent(Student student);
 
 	/*按照查询条件分页查询学生信息记录*/
 	List<Student> queryStudent(@Param("where") String where, @Param("startIndex") int startIndex, @Param("pageSize") int pageSize) throws Exception;

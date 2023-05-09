@@ -51,20 +51,19 @@ public class SystemController {
 
         response.setContentType("text/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        System.out.println(success);
+
         m.put("success", success);
         m.put("msg", success ? "登录成功" : "登录失败");
 
         out.println(JSON.toJSONString(m));
         out.flush();
         out.close();
-
     }
 
     @GetMapping("/logout")
     public String logout(HttpSession session){
         session.removeAttribute("username");
         session.removeAttribute("identify");
-        return "login";
+        return "redirect:/login";
     }
 }

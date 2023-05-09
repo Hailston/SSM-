@@ -1,9 +1,9 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hngy.mapper.StudentMapper">
 	<!-- 添加学生信息记录 -->
-	<insert id="addStudent" parameterType="student">
-		insert into t_student(studentNumber,studentName,studentPassword,studentSex,studentClassNumber,studentBirthday,studentState,studentPhoto,studentTelephone,studentEmail,studentQQ,studentAddress,studentMemo) values 
-		(#{studentNumber},#{studentName},#{studentPassword},#{studentSex},#{studentClassNumber.classNumber},#{studentBirthday},#{studentState},#{studentPhoto},#{studentTelephone},#{studentEmail},#{studentQQ},#{studentAddress},#{studentMemo})
+	<insert id="addStudent">
+		insert into student(sno,username,sex,password,department,jiguan,mark,email,image,tel,maxClasses) values
+		(#{sno},#{username},#{sex},#{password},#{department},#{jiguan},#{mark},#{email},#{image},#{tel},#{maxClasses})
 	</insert>
 
 	<!-- 按照查询条件分页查询学生信息记录 -->

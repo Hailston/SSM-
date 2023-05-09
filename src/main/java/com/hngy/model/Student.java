@@ -9,17 +9,16 @@ import lombok.Data;
  **/
 @Data
 public class Student {
-    private String studentNumber;
-    private String studentName;
-    private String studentPassword;
-    private String studentSex;
-    private String studentClassNumber;
-    private String studentBirthday;
-    private String studentState;
-    private String studentPhoto;
-    private String studentTelephone;
-    private String studentEmail;
-    private String studentQQ;
-    private String studentAddress;
-    private String studentMemo;
+    private Integer id;
+    private String sno;
+    private String username;
+    private String sex;
+    private String password;
+    private String department;
+    private String jiguan;
+    private String mark;
+    private String email;
+    private String image;
+    private String tel;
+    private String maxClasses;
 }
