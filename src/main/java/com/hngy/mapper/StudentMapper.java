@@ -3,6 +3,7 @@ package com.hngy.mapper;
 
 import java.util.List;
 
+import com.hngy.listener.StudentData;
 import com.hngy.model.Student;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,7 +13,7 @@ public interface StudentMapper {
 	void addStudent(Student student);
 
 	/*按照查询条件分页查询学生信息记录*/
-	List<Student> queryStudent(@Param("where") String where, @Param("startIndex") int startIndex, @Param("pageSize") int pageSize) throws Exception;
+	List<Student> listAll();
 
 	/*按照查询条件查询所有学生信息记录*/
 	List<Student> queryStudentList(@Param("where") String where) throws Exception;
@@ -28,5 +29,5 @@ public interface StudentMapper {
 
 	/*删除学生信息记录*/
 	void deleteStudent(String studentNumber) throws Exception;
-
+	int insertBatch(@Param("students") List<StudentData> studentData);
 }
