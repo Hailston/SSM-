@@ -4,7 +4,6 @@ package com.hngy.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import com.hngy.model.CollegeInfo;
 
 public interface CollegeInfoMapper {
 	/*添加学院信息信息*/

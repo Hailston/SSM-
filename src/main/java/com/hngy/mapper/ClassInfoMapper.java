@@ -2,7 +2,6 @@ package com.hngy.mapper;
 
 import java.util.List;
 
-import com.hngy.model.ClassInfo;
 import org.apache.ibatis.annotations.Param;
 
 public interface ClassInfoMapper {

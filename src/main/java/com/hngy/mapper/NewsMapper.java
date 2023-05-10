@@ -3,7 +3,6 @@ package com.hngy.mapper;
 
 import java.util.List;
 
-import com.hngy.model.News;
 import org.apache.ibatis.annotations.Param;
 
 

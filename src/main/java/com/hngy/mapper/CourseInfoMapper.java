@@ -2,7 +2,6 @@ package com.hngy.mapper;
 
 
 
-import com.hngy.model.CourseInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

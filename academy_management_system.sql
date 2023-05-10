@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 08/05/2023 09:34:32
+ Date: 10/05/2023 22:15:14
 */
 
 SET NAMES utf8mb4;
@@ -22,161 +22,127 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
-  `username` varchar(20) NOT NULL DEFAULT '',
-  `password` varchar(32) DEFAULT NULL,
-  PRIMARY KEY (`username`)
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL DEFAULT '',
+  `password` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of admin
+-- ----------------------------
+BEGIN;
+INSERT INTO `admin` (`id`, `username`, `password`) VALUES (1, 'a', 'a');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for classes
+-- ----------------------------
+DROP TABLE IF EXISTS `classes`;
+CREATE TABLE `classes` (
+  `id` int(30) NOT NULL AUTO_INCREMENT COMMENT '课程号',
+  `teacher_id` int(50) DEFAULT NULL COMMENT '教师号',
+  `choose_max` int(11) DEFAULT NULL COMMENT '最大选课人数',
+  `choose_cur_num` int(11) DEFAULT NULL COMMENT '已选人数',
+  `room` varchar(50) DEFAULT NULL COMMENT '教室',
+  `cour_time` varchar(50) DEFAULT NULL COMMENT '上课时间',
+  `cmark` varchar(50) DEFAULT NULL COMMENT '学分',
+  `cname` varchar(60) DEFAULT NULL COMMENT '课程名',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for t_classInfo
+-- Records of classes
 -- ----------------------------
-DROP TABLE IF EXISTS `t_classInfo`;
-CREATE TABLE `t_classInfo` (
-  `classNumber` varchar(20) NOT NULL COMMENT 'classNumber',
-  `className` varchar(20) NOT NULL COMMENT '班级名称',
-  `classSpecialFieldNumber` varchar(20) NOT NULL COMMENT '所属专业',
-  `classBirthDate` varchar(20) DEFAULT NULL COMMENT '成立日期',
-  `classTeacherCharge` varchar(12) DEFAULT NULL COMMENT '班主任',
-  `classTelephone` varchar(20) DEFAULT NULL COMMENT '联系电话',
-  `classMemo` varchar(100) DEFAULT NULL COMMENT '附加信息',
-  PRIMARY KEY (`classNumber`),
-  KEY `classSpecialFieldNumber` (`classSpecialFieldNumber`),
-  CONSTRAINT `t_classinfo_ibfk_1` FOREIGN KEY (`classSpecialFieldNumber`) REFERENCES `t_specialFieldInfo` (`specialFieldNumber`)
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for student
+-- ----------------------------
+DROP TABLE IF EXISTS `student`;
+CREATE TABLE `student` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sno` varchar(50) NOT NULL COMMENT '学号',
+  `username` varchar(50) DEFAULT NULL COMMENT '用户名',
+  `sex` varchar(10) DEFAULT NULL COMMENT '性别',
+  `password` varchar(20) DEFAULT NULL COMMENT '密码',
+  `department` varchar(30) DEFAULT NULL COMMENT '院系',
+  `jiguan` varchar(60) DEFAULT NULL COMMENT '籍贯',
+  `mark` varchar(50) DEFAULT NULL COMMENT '学分',
+  `email` varchar(50) DEFAULT NULL COMMENT '电子邮件',
+  `image` varchar(255) DEFAULT NULL COMMENT '照片',
+  `tel` varchar(50) DEFAULT NULL COMMENT '电话',
+  `maxClasses` int(11) DEFAULT NULL COMMENT '最大选课数',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of student
+-- ----------------------------
+BEGIN;
+INSERT INTO `student` (`id`, `sno`, `username`, `sex`, `password`, `department`, `jiguan`, `mark`, `email`, `image`, `tel`, `maxClasses`) VALUES (1, '1001', '刘文选', '男', '@hngy', '信息工程学院', '北京', '10', '2523760784@qq.com', NULL, '17674128515', 10);
+INSERT INTO `student` (`id`, `sno`, `username`, `sex`, `password`, `department`, `jiguan`, `mark`, `email`, `image`, `tel`, `maxClasses`) VALUES (2, '1002', '杨定康', '男', '@hngy', '信息工程学院', '北京', '10', 'test@qq.com', NULL, '17674128515', 10);
+INSERT INTO `student` (`id`, `sno`, `username`, `sex`, `password`, `department`, `jiguan`, `mark`, `email`, `image`, `tel`, `maxClasses`) VALUES (3, '1003', '伍允文', '男', '@hngy', '信息工程学院', '北京', '10', 'test@qq.com', NULL, '17674128515', 10);
+INSERT INTO `student` (`id`, `sno`, `username`, `sex`, `password`, `department`, `jiguan`, `mark`, `email`, `image`, `tel`, `maxClasses`) VALUES (4, '1004', '彭源1', '男', '@hngy123', '信息工程学院', '湖南', '10', 'test1@qq.com', NULL, '17611111111', 10);
+INSERT INTO `student` (`id`, `sno`, `username`, `sex`, `password`, `department`, `jiguan`, `mark`, `email`, `image`, `tel`, `maxClasses`) VALUES (5, '1005', '彭源2', '男', '@hngy124', '信息工程学院', '湖南', '10', 'test2@qq.com', NULL, '17611111112', 10);
+INSERT INTO `student` (`id`, `sno`, `username`, `sex`, `password`, `department`, `jiguan`, `mark`, `email`, `image`, `tel`, `maxClasses`) VALUES (6, '1006', '彭源3', '男', '@hngy125', '信息工程学院', '湖南', '10', 'test3@qq.com', NULL, '17611111113', 10);
+INSERT INTO `student` (`id`, `sno`, `username`, `sex`, `password`, `department`, `jiguan`, `mark`, `email`, `image`, `tel`, `maxClasses`) VALUES (7, '1007', '彭源4', '男', '@hngy126', '信息工程学院', '湖南', '10', 'test4@qq.com', NULL, '17611111114', 10);
+INSERT INTO `student` (`id`, `sno`, `username`, `sex`, `password`, `department`, `jiguan`, `mark`, `email`, `image`, `tel`, `maxClasses`) VALUES (8, '1008', '彭源5', '男', '@hngy127', '信息工程学院', '湖南', '10', 'test5@qq.com', NULL, '17611111115', 10);
+INSERT INTO `student` (`id`, `sno`, `username`, `sex`, `password`, `department`, `jiguan`, `mark`, `email`, `image`, `tel`, `maxClasses`) VALUES (9, '1009', '彭源6', '男', '@hngy128', '信息工程学院', '湖南', '10', 'test6@qq.com', NULL, '17611111116', 10);
+INSERT INTO `student` (`id`, `sno`, `username`, `sex`, `password`, `department`, `jiguan`, `mark`, `email`, `image`, `tel`, `maxClasses`) VALUES (10, '1010', '彭源7', '男', '@hngy129', '信息工程学院', '湖南', '10', 'test7@qq.com', NULL, '17611111117', 10);
+INSERT INTO `student` (`id`, `sno`, `username`, `sex`, `password`, `department`, `jiguan`, `mark`, `email`, `image`, `tel`, `maxClasses`) VALUES (11, '1011', '彭源8', '男', '@hngy130', '信息工程学院', '湖南', '10', 'test8@qq.com', NULL, '17611111118', 10);
+INSERT INTO `student` (`id`, `sno`, `username`, `sex`, `password`, `department`, `jiguan`, `mark`, `email`, `image`, `tel`, `maxClasses`) VALUES (60, '1011', '伍允文1', '男', '@hngy123', '信息工程学院', '湖南', '10', 'test9@qq.com', NULL, '17611111118', 10);
+INSERT INTO `student` (`id`, `sno`, `username`, `sex`, `password`, `department`, `jiguan`, `mark`, `email`, `image`, `tel`, `maxClasses`) VALUES (61, '1012', '伍允文2', '男', '@hngy124', '信息工程学院', '湖南', '10', 'test10@qq.com', NULL, '17611111119', 10);
+INSERT INTO `student` (`id`, `sno`, `username`, `sex`, `password`, `department`, `jiguan`, `mark`, `email`, `image`, `tel`, `maxClasses`) VALUES (62, '1013', '伍允文3', '男', '@hngy125', '信息工程学院', '湖南', '10', 'test11@qq.com', NULL, '17611111120', 10);
+INSERT INTO `student` (`id`, `sno`, `username`, `sex`, `password`, `department`, `jiguan`, `mark`, `email`, `image`, `tel`, `maxClasses`) VALUES (63, '1014', '伍允文4', '男', '@hngy126', '信息工程学院', '湖南', '10', 'test12@qq.com', NULL, '17611111121', 10);
+INSERT INTO `student` (`id`, `sno`, `username`, `sex`, `password`, `department`, `jiguan`, `mark`, `email`, `image`, `tel`, `maxClasses`) VALUES (64, '1015', '伍允文5', '男', '@hngy127', '信息工程学院', '湖南', '10', 'test13@qq.com', NULL, '17611111122', 10);
+INSERT INTO `student` (`id`, `sno`, `username`, `sex`, `password`, `department`, `jiguan`, `mark`, `email`, `image`, `tel`, `maxClasses`) VALUES (65, '1016', '伍允文6', '男', '@hngy128', '信息工程学院', '湖南', '10', 'test14@qq.com', NULL, '17611111123', 10);
+INSERT INTO `student` (`id`, `sno`, `username`, `sex`, `password`, `department`, `jiguan`, `mark`, `email`, `image`, `tel`, `maxClasses`) VALUES (66, '1017', '伍允文7', '男', '@hngy129', '信息工程学院', '湖南', '10', 'test15@qq.com', NULL, '17611111124', 10);
+INSERT INTO `student` (`id`, `sno`, `username`, `sex`, `password`, `department`, `jiguan`, `mark`, `email`, `image`, `tel`, `maxClasses`) VALUES (67, '1018', '伍允文8', '男', '@hngy130', '信息工程学院', '湖南', '10', 'test16@qq.com', NULL, '17611111125', 10);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for student_classes
+-- ----------------------------
+DROP TABLE IF EXISTS `student_classes`;
+CREATE TABLE `student_classes` (
+  `cscore` int(11) DEFAULT NULL COMMENT '成绩',
+  `st_id` int(11) NOT NULL COMMENT '学生标识',
+  `cs_id` int(11) NOT NULL COMMENT '课程号',
+  PRIMARY KEY (`st_id`,`cs_id`),
+  KEY `cs_id` (`cs_id`),
+  CONSTRAINT `student_classes_ibfk_1` FOREIGN KEY (`st_id`) REFERENCES `student` (`id`),
+  CONSTRAINT `student_classes_ibfk_2` FOREIGN KEY (`cs_id`) REFERENCES `classes` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for t_collegeInfo
+-- Records of student_classes
 -- ----------------------------
-DROP TABLE IF EXISTS `t_collegeInfo`;
-CREATE TABLE `t_collegeInfo` (
-  `collegeNumber` varchar(20) NOT NULL COMMENT 'collegeNumber',
-  `collegeName` varchar(20) NOT NULL COMMENT '学院名称',
-  `collegeBirthDate` varchar(20) DEFAULT NULL COMMENT '成立日期',
-  `collegeMan` varchar(10) DEFAULT NULL COMMENT '院长姓名',
-  `collegeTelephone` varchar(20) DEFAULT NULL COMMENT '联系电话',
-  `collegeMemo` varchar(100) DEFAULT NULL COMMENT '附加信息',
-  PRIMARY KEY (`collegeNumber`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+BEGIN;
+COMMIT;
 
 -- ----------------------------
--- Table structure for t_courseInfo
+-- Table structure for teacher
 -- ----------------------------
-DROP TABLE IF EXISTS `t_courseInfo`;
-CREATE TABLE `t_courseInfo` (
-  `courseNumber` varchar(20) NOT NULL COMMENT 'courseNumber',
-  `courseName` varchar(20) NOT NULL COMMENT '课程名称',
-  `courseTeacher` varchar(20) NOT NULL COMMENT '上课老师',
-  `courseTime` varchar(40) DEFAULT NULL COMMENT '上课时间',
-  `coursePlace` varchar(40) DEFAULT NULL COMMENT '上课地点',
-  `courseScore` float NOT NULL COMMENT '课程学分',
-  `courseMemo` varchar(100) DEFAULT NULL COMMENT '附加信息',
-  PRIMARY KEY (`courseNumber`),
-  KEY `courseTeacher` (`courseTeacher`),
-  CONSTRAINT `t_courseinfo_ibfk_1` FOREIGN KEY (`courseTeacher`) REFERENCES `t_teacher` (`teacherNumber`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `teacher`;
+CREATE TABLE `teacher` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tno` varchar(11) DEFAULT NULL COMMENT '教师号',
+  `tname` varchar(50) NOT NULL COMMENT '教师名',
+  `age` int(50) DEFAULT NULL COMMENT '年龄',
+  `email` varchar(50) DEFAULT NULL COMMENT '电子邮件',
+  `tel` varchar(50) DEFAULT NULL COMMENT '电话',
+  `password` varchar(50) DEFAULT '@hngy123' COMMENT '教师密码',
+  `teaType` varchar(50) DEFAULT NULL COMMENT '教师类型',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for t_news
+-- Records of teacher
 -- ----------------------------
-DROP TABLE IF EXISTS `t_news`;
-CREATE TABLE `t_news` (
-  `newsId` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录编号',
-  `newsTitle` varchar(50) NOT NULL COMMENT '新闻标题',
-  `newsContent` varchar(500) NOT NULL COMMENT '新闻内容',
-  `newsDate` varchar(20) DEFAULT NULL COMMENT '发布日期',
-  `newsPhoto` varchar(60) NOT NULL COMMENT '新闻图片',
-  PRIMARY KEY (`newsId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for t_scoreInfo
--- ----------------------------
-DROP TABLE IF EXISTS `t_scoreInfo`;
-CREATE TABLE `t_scoreInfo` (
-  `scoreId` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录编号',
-  `studentNumber` varchar(30) NOT NULL COMMENT '学生对象',
-  `courseNumber` varchar(20) NOT NULL COMMENT '课程对象',
-  `scoreValue` float NOT NULL COMMENT '成绩得分',
-  `studentEvaluate` varchar(30) DEFAULT NULL COMMENT '学生评价',
-  PRIMARY KEY (`scoreId`),
-  KEY `studentNumber` (`studentNumber`),
-  KEY `courseNumber` (`courseNumber`),
-  CONSTRAINT `t_scoreinfo_ibfk_1` FOREIGN KEY (`studentNumber`) REFERENCES `t_student` (`studentNumber`),
-  CONSTRAINT `t_scoreinfo_ibfk_2` FOREIGN KEY (`courseNumber`) REFERENCES `t_courseInfo` (`courseNumber`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for t_specialFieldInfo
--- ----------------------------
-DROP TABLE IF EXISTS `t_specialFieldInfo`;
-CREATE TABLE `t_specialFieldInfo` (
-  `specialFieldNumber` varchar(20) NOT NULL COMMENT 'specialFieldNumber',
-  `specialFieldName` varchar(20) NOT NULL COMMENT '专业名称',
-  `specialCollegeNumber` varchar(20) NOT NULL COMMENT '所在学院',
-  `specialBirthDate` varchar(20) DEFAULT NULL COMMENT '成立日期',
-  `specialMan` varchar(10) DEFAULT NULL COMMENT '联系人',
-  `specialTelephone` varchar(20) DEFAULT NULL COMMENT '联系电话',
-  `specialMemo` varchar(100) DEFAULT NULL COMMENT '附加信息',
-  PRIMARY KEY (`specialFieldNumber`),
-  KEY `specialCollegeNumber` (`specialCollegeNumber`),
-  CONSTRAINT `t_specialfieldinfo_ibfk_1` FOREIGN KEY (`specialCollegeNumber`) REFERENCES `t_collegeInfo` (`collegeNumber`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for t_student
--- ----------------------------
-DROP TABLE IF EXISTS `t_student`;
-CREATE TABLE `t_student` (
-  `studentNumber` varchar(30) NOT NULL COMMENT 'studentNumber',
-  `studentName` varchar(12) NOT NULL COMMENT '姓名',
-  `studentPassword` varchar(30) NOT NULL COMMENT '登录密码',
-  `studentSex` varchar(2) NOT NULL COMMENT '性别',
-  `studentClassNumber` varchar(20) NOT NULL COMMENT '所在班级',
-  `studentBirthday` varchar(20) DEFAULT NULL COMMENT '出生日期',
-  `studentState` varchar(20) DEFAULT NULL COMMENT '政治面貌',
-  `studentPhoto` varchar(60) NOT NULL COMMENT '学生照片',
-  `studentTelephone` varchar(20) DEFAULT NULL COMMENT '联系电话',
-  `studentEmail` varchar(30) DEFAULT NULL COMMENT '学生邮箱',
-  `studentQQ` varchar(20) DEFAULT NULL COMMENT '联系qq',
-  `studentAddress` varchar(100) DEFAULT NULL COMMENT '家庭地址',
-  `studentMemo` varchar(100) DEFAULT NULL COMMENT '附加信息',
-  PRIMARY KEY (`studentNumber`),
-  KEY `studentClassNumber` (`studentClassNumber`),
-  CONSTRAINT `t_student_ibfk_1` FOREIGN KEY (`studentClassNumber`) REFERENCES `t_classInfo` (`classNumber`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for t_studentSelectCourseInfo
--- ----------------------------
-DROP TABLE IF EXISTS `t_studentSelectCourseInfo`;
-CREATE TABLE `t_studentSelectCourseInfo` (
-  `selectId` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录编号',
-  `studentNumber` varchar(30) NOT NULL COMMENT '学生对象',
-  `courseNumber` varchar(20) NOT NULL COMMENT '课程对象',
-  PRIMARY KEY (`selectId`),
-  KEY `studentNumber` (`studentNumber`),
-  KEY `courseNumber` (`courseNumber`),
-  CONSTRAINT `t_studentselectcourseinfo_ibfk_1` FOREIGN KEY (`studentNumber`) REFERENCES `t_student` (`studentNumber`),
-  CONSTRAINT `t_studentselectcourseinfo_ibfk_2` FOREIGN KEY (`courseNumber`) REFERENCES `t_courseInfo` (`courseNumber`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for t_teacher
--- ----------------------------
-DROP TABLE IF EXISTS `t_teacher`;
-CREATE TABLE `t_teacher` (
-  `teacherNumber` varchar(20) NOT NULL COMMENT 'teacherNumber',
-  `teacherName` varchar(12) NOT NULL COMMENT '教师姓名',
-  `teacherPassword` varchar(30) DEFAULT NULL COMMENT '登录密码',
-  `teacherSex` varchar(2) NOT NULL COMMENT '性别',
-  `teacherBirthday` varchar(20) DEFAULT NULL COMMENT '出生日期',
-  `teacherArriveDate` varchar(20) DEFAULT NULL COMMENT '入职日期',
-  `teacherCardNumber` varchar(20) DEFAULT NULL COMMENT '身份证号',
-  `teacherPhone` varchar(20) DEFAULT NULL COMMENT '联系电话',
-  `teacherPhoto` varchar(60) NOT NULL COMMENT '教师照片',
-  `teacherAddress` varchar(100) DEFAULT NULL COMMENT '家庭地址',
-  `teacherMemo` varchar(100) DEFAULT NULL COMMENT '附加信息',
-  PRIMARY KEY (`teacherNumber`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+BEGIN;
+INSERT INTO `teacher` (`id`, `tno`, `tname`, `age`, `email`, `tel`, `password`, `teaType`) VALUES (1, '1001', '刘文选', 10, '', '', '', '教授');
+COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

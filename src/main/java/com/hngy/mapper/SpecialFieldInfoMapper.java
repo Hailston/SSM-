@@ -1,7 +1,6 @@
 package com.hngy.mapper;
 
 
-import com.hngy.model.SpecialFieldInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
