@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface TeacherMapper {
 	/*添加教师信息信息*/
-	void addTeacher(Teacher teacher) throws Exception;
+	void addTeacher(Teacher teacher);
 
 	/*按照查询条件分页查询教师信息记录*/
 	List<Teacher> queryTeacher(@Param("where") String where, @Param("startIndex") int startIndex, @Param("pageSize") int pageSize) throws Exception;

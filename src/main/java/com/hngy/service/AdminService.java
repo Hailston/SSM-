@@ -2,6 +2,7 @@ package com.hngy.service;
 
 import com.github.pagehelper.PageInfo;
 import com.hngy.model.Student;
+import com.hngy.model.Teacher;
 import com.hngy.vo.ResultVO;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,4 +19,6 @@ public interface AdminService {
     PageInfo<Student> pageStudent(Integer page, Integer rows);
 
     void importStudentExcel(MultipartFile file) throws IOException;
+
+    ResultVO<?> addTeacher(Teacher teacher);
 }

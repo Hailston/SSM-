@@ -6,6 +6,7 @@ import com.alibaba.fastjson2.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.hngy.listener.StudentDataListener;
 import com.hngy.model.Student;
+import com.hngy.model.Teacher;
 import com.hngy.service.AdminService;
 import com.hngy.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,7 @@ public class AdminController {
     public ResultVO<?> addStudent(Student student){
         return adminService.addStudent(student);
     }
+
     @PostMapping("/student/list")
     @ResponseBody
     public Map<String, Object> listStudent(Integer page, Integer rows, HttpServletResponse response) throws IOException {
@@ -52,10 +54,17 @@ public class AdminController {
         map.put("rows",pageInfo.getList());
         return map;
     }
+
     @PostMapping("/student/import")
     @ResponseBody
     public ResultVO<?> importExcel(MultipartFile file) throws IOException {
         adminService.importStudentExcel(file);
         return ResultVO.ok("导入成功！");
+    }
+
+    @PostMapping("/teacher/add")
+    @ResponseBody
+    public ResultVO<?> addTeacher(Teacher teacher){
+        return adminService.addTeacher(teacher);
     }
 }

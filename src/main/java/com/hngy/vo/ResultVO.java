@@ -15,16 +15,16 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public class ResultVO<T> {
     private Integer code;
-    private String msg;
+    private String message;
     private T data;
     private Boolean success;
 
-    public ResultVO(Integer code, String msg, Boolean success) {
+    public ResultVO(Integer code, String message, Boolean success) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
         this.success = success;
     }
-    public static ResultVO<?> ok(String msg){
-        return new ResultVO<>(HttpStatus.OK.value(), msg,true);
+    public static ResultVO<?> ok(String message){
+        return new ResultVO<>(HttpStatus.OK.value(), message,true);
     }
 }

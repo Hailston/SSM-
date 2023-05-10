@@ -41,7 +41,7 @@ $(function () {
                         text: "添加教师信息",
                         state: "open",
                         iconCls: "icon-add-new",
-                        url: "Teacher/teacher_add.jsp"
+                        url: "/jsp/admin/teacher_add.jsp"
                     },
                         {
                             text: "教师信息管理",
