@@ -9,15 +9,12 @@ import lombok.Data;
  **/
 @Data
 public class Teacher {
-    private String teacherNumber;
-    private String teacherName;
-    private String teacherPassword;
-    private String teacherSex;
-    private String teacherBirthday;
-    private String teacherArriveDate;
-    private String teacherCardNumber;
-    private String teacherPhone;
-    private String teacherPhoto;
-    private String teacherAddress;
-    private String teacherMemo;
+    private Integer id;
+    private String tno;
+    private String tname;
+    private Integer age;
+    private String email;
+    private String tel;
+    private String password;
+    private String teaType;
 }
