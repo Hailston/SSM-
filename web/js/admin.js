@@ -59,13 +59,13 @@ $(function () {
                         text: "添加课程信息",
                         state: "open",
                         iconCls: "icon-add-new",
-                        url: "CourseInfo/courseInfo_add.jsp"
+                        url: "/jsp/admin/classes_add.jsp"
                     },
                         {
                             text: "课程信息管理",
                             state: "open",
                             iconCls: "icon-manager",
-                            url: "CourseInfo/courseInfo_query_result.jsp"
+                            url: "/jsp/admin/classes_query_result.jsp"
                         }
                     ]
             },{

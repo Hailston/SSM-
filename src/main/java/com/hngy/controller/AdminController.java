@@ -5,6 +5,7 @@ import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.hngy.listener.StudentDataListener;
+import com.hngy.model.Classes;
 import com.hngy.model.Student;
 import com.hngy.model.Teacher;
 import com.hngy.service.AdminService;
@@ -82,6 +83,29 @@ public class AdminController {
     @ResponseBody
     public ResultVO<?> importTeacherExcel(MultipartFile file) throws IOException{
         adminService.importTeacherExcel(file);
+        return ResultVO.ok("导入成功！");
+    }
+
+    @PostMapping("/classes/add")
+    @ResponseBody
+    public ResultVO<?> addClasses(Classes classes){
+        return adminService.addClasses(classes);
+    }
+
+    @PostMapping("/classes/list")
+    @ResponseBody
+    public Map<String, Object> listClasses(Integer page, Integer rows){
+        PageInfo<Classes> pageInfo = adminService.pageClasses(page, rows);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("total", pageInfo.getTotal());
+        map.put("rows",pageInfo.getList());
+        return map;
+    }
+
+    @PostMapping("/classes/import")
+    @ResponseBody
+    public ResultVO<?> importClassesExcel(MultipartFile file) throws IOException{
+        adminService.importClassesExcel(file);
         return ResultVO.ok("导入成功！");
     }
 }

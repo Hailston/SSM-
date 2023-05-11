@@ -4,12 +4,11 @@ import com.alibaba.excel.EasyExcel;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hngy.exception.StudentException;
-import com.hngy.listener.StudentData;
-import com.hngy.listener.StudentDataListener;
-import com.hngy.listener.TeacherData;
-import com.hngy.listener.TeacherDataListener;
+import com.hngy.listener.*;
+import com.hngy.mapper.ClassesMapper;
 import com.hngy.mapper.StudentMapper;
 import com.hngy.mapper.TeacherMapper;
+import com.hngy.model.Classes;
 import com.hngy.model.Student;
 import com.hngy.model.Teacher;
 import com.hngy.service.AdminService;
@@ -33,6 +32,10 @@ public class AdminServiceImpl implements AdminService {
     private StudentMapper studentMapper;
     @Autowired
     private TeacherMapper teacherMapper;
+
+    @Autowired
+    private ClassesMapper classesMapper;
+
 
     @Override
     public ResultVO<?> addStudent(Student student) {
@@ -73,5 +76,23 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void importTeacherExcel(MultipartFile file) throws IOException {
         EasyExcel.read(file.getInputStream(), TeacherData.class, new TeacherDataListener(teacherMapper)).sheet().doRead();
+    }
+
+    @Override
+    public ResultVO<?> addClasses(Classes classes) {
+        classesMapper.addClasses(classes);
+        return ResultVO.ok("添加成功!");
+    }
+
+    @Override
+    public void importClassesExcel(MultipartFile file) throws IOException {
+        EasyExcel.read(file.getInputStream(), Classes.class, new ClassesDataListener(classesMapper)).sheet().doRead();
+    }
+
+    @Override
+    public PageInfo<Classes> pageClasses(Integer page, Integer rows) {
+        PageHelper.startPage(page, rows);
+        List<Classes> classes = classesMapper.listAll();
+        return new PageInfo<>(classes);
     }
 }
