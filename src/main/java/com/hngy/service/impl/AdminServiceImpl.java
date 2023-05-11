@@ -6,6 +6,8 @@ import com.github.pagehelper.PageInfo;
 import com.hngy.exception.StudentException;
 import com.hngy.listener.StudentData;
 import com.hngy.listener.StudentDataListener;
+import com.hngy.listener.TeacherData;
+import com.hngy.listener.TeacherDataListener;
 import com.hngy.mapper.StudentMapper;
 import com.hngy.mapper.TeacherMapper;
 import com.hngy.model.Student;
@@ -59,5 +61,17 @@ public class AdminServiceImpl implements AdminService {
     public ResultVO<?> addTeacher(Teacher teacher) {
         teacherMapper.addTeacher(teacher);
         return ResultVO.ok("添加成功!");
+    }
+
+    @Override
+    public PageInfo<Teacher> pageTeacher(Integer page, Integer rows) {
+        PageHelper.startPage(page, rows);
+        List<Teacher> teachers = teacherMapper.listAll();
+        return new PageInfo<>(teachers);
+    }
+
+    @Override
+    public void importTeacherExcel(MultipartFile file) throws IOException {
+        EasyExcel.read(file.getInputStream(), TeacherData.class, new TeacherDataListener(teacherMapper)).sheet().doRead();
     }
 }

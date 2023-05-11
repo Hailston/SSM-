@@ -47,7 +47,7 @@ $(function () {
                             text: "教师信息管理",
                             state: "open",
                             iconCls: "icon-manager",
-                            url: "Teacher/teacher_query_result.jsp"
+                            url: "/jsp/admin/teacher_query_result.jsp"
                         }
                     ]
             },{

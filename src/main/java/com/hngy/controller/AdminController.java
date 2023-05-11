@@ -47,7 +47,7 @@ public class AdminController {
 
     @PostMapping("/student/list")
     @ResponseBody
-    public Map<String, Object> listStudent(Integer page, Integer rows, HttpServletResponse response) throws IOException {
+    public Map<String, Object> listStudent(Integer page, Integer rows) throws IOException {
         PageInfo<Student> pageInfo = adminService.pageStudent(page, rows);
         HashMap<String, Object> map = new HashMap<>();
         map.put("total", pageInfo.getTotal());
@@ -66,5 +66,22 @@ public class AdminController {
     @ResponseBody
     public ResultVO<?> addTeacher(Teacher teacher){
         return adminService.addTeacher(teacher);
+    }
+
+    @PostMapping("/teacher/list")
+    @ResponseBody
+    public Map<String, Object> listTeacher(Integer page, Integer rows){
+        PageInfo<Teacher> pageInfo = adminService.pageTeacher(page, rows);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("total", pageInfo.getTotal());
+        map.put("rows",pageInfo.getList());
+        return map;
+    }
+
+    @PostMapping("/teacher/import")
+    @ResponseBody
+    public ResultVO<?> importTeacherExcel(MultipartFile file) throws IOException{
+        adminService.importTeacherExcel(file);
+        return ResultVO.ok("导入成功！");
     }
 }

@@ -5,10 +5,16 @@
 		insert into teacher(tno, tname, age, email, tel, password, teaType) values
 		(#{tno},#{tname},#{age},#{email},#{tel},#{password},#{teaType})
 	</insert>
+	<insert id="insertBatch">
+		insert into teacher(tno, tname, age, email, tel, teaType) values
+		<foreach collection="teachers" item="item" separator=",">
+			(#{item.tno},#{item.tname},#{item.age},#{item.email},#{item.tel},#{item.teaType})
+		</foreach>
+	</insert>
 
 	<!-- 按照查询条件分页查询教师信息记录 -->
-	<select id="queryTeacher" resultMap="teacherMap" >
-		select t_teacher.* from t_teacher ${where} limit #{startIndex},#{pageSize}
+	<select id="listAll" resultMap="teacherMap" >
+		select * from teacher
 	</select>
 	<resultMap id="teacherMap" type="teacher">
         <id property="teacherNumber" column="teacherNumber" />

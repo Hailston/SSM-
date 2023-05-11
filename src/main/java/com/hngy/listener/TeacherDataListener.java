@@ -4,20 +4,18 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.read.listener.ReadListener;
 import com.alibaba.excel.util.ListUtils;
 import com.alibaba.fastjson.JSON;
-import com.hngy.mapper.StudentMapper;
-import com.hngy.model.Student;
+import com.hngy.mapper.TeacherMapper;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
 /**
- * @name: StudentDataListener
+ * @name: TeacherDataListener
  * @author: liuwenxuan
- * @date: 2023-05-10 09:14
+ * @date: 2023-05-11 08:58
  **/
 @Slf4j
-public class StudentDataListener implements ReadListener<StudentData> {
-
+public class TeacherDataListener implements ReadListener<TeacherData> {
     /**
      * 每隔5条存储数据库，实际使用中可以100条，然后清理list ，方便内存回收
      */
@@ -25,23 +23,15 @@ public class StudentDataListener implements ReadListener<StudentData> {
     /**
      * 缓存的数据
      */
-    private List<StudentData> cachedDataList = ListUtils.newArrayListWithExpectedSize(BATCH_COUNT);
-    /**
-     * 假设这个是一个DAO，当然有业务逻辑这个也可以是一个service。当然如果不用存储这个对象没用。
-     */
-    private StudentMapper studentMapper;
+    private List<TeacherData> cachedDataList = ListUtils.newArrayListWithExpectedSize(BATCH_COUNT);
+    private TeacherMapper teacherMapper;
 
-
-    public StudentDataListener(StudentMapper studentMapper) {
-        this.studentMapper = studentMapper;
+    public TeacherDataListener(TeacherMapper teacherMapper) {
+        this.teacherMapper = teacherMapper;
     }
 
-    /**
-     * 这个每一条数据解析都会来调用
-     *
-     */
     @Override
-    public void invoke(StudentData data, AnalysisContext context) {
+    public void invoke(TeacherData data, AnalysisContext analysisContext) {
         log.info("解析到一条数据:{}", JSON.toJSONString(data));
         cachedDataList.add(data);
         // 达到BATCH_COUNT了，需要去存储一次数据库，防止数据几万条数据在内存，容易OOM
@@ -52,11 +42,6 @@ public class StudentDataListener implements ReadListener<StudentData> {
         }
     }
 
-    /**
-     * 所有数据解析完成了 都会来调用
-     *
-     * @param context
-     */
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
         // 这里也要保存数据，确保最后遗留的数据也存储到数据库
@@ -69,9 +54,7 @@ public class StudentDataListener implements ReadListener<StudentData> {
      */
     private void saveData() {
         log.info("{}条数据，开始存储数据库！", cachedDataList.size());
-        studentMapper.insertBatch(cachedDataList);
+        teacherMapper.insertBatch(cachedDataList);
         log.info("存储数据库成功！");
     }
 }
-
-

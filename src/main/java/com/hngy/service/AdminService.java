@@ -21,4 +21,8 @@ public interface AdminService {
     void importStudentExcel(MultipartFile file) throws IOException;
 
     ResultVO<?> addTeacher(Teacher teacher);
+
+    PageInfo<Teacher> pageTeacher(Integer page, Integer rows);
+
+    void importTeacherExcel(MultipartFile file) throws IOException;
 }

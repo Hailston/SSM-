@@ -2,6 +2,7 @@ package com.hngy.mapper;
 
 
 
+import com.hngy.listener.TeacherData;
 import com.hngy.model.Teacher;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,8 +13,8 @@ public interface TeacherMapper {
 	/*添加教师信息信息*/
 	void addTeacher(Teacher teacher);
 
-	/*按照查询条件分页查询教师信息记录*/
-	List<Teacher> queryTeacher(@Param("where") String where, @Param("startIndex") int startIndex, @Param("pageSize") int pageSize) throws Exception;
+	/*查询所有教师信息记录*/
+	List<Teacher> listAll();
 
 	/*按照查询条件查询所有教师信息记录*/
 	List<Teacher> queryTeacherList(@Param("where") String where) throws Exception;
@@ -30,4 +31,5 @@ public interface TeacherMapper {
 	/*删除教师信息记录*/
 	void deleteTeacher(String teacherNumber) throws Exception;
 
+    void insertBatch(@Param("teachers") List<TeacherData> teachers);
 }
