@@ -32,4 +32,6 @@ public interface AdminService {
     void importClassesExcel(MultipartFile file) throws IOException;
 
     PageInfo<Classes> pageClasses(Integer page, Integer rows);
+
+    ResultVO<?> changePassword(String username, String oldPassword, String newPassword);
 }

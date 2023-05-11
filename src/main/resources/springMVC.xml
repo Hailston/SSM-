@@ -58,4 +58,12 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.hngy.mapper" />
     </bean>
+    <bean id="exceptionResolver"
+          class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="com.hngy.exception.UserException">user_error</prop>
+            </props>
+        </property>
+    </bean>
 </beans>

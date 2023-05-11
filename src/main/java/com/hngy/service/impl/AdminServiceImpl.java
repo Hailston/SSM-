@@ -4,7 +4,9 @@ import com.alibaba.excel.EasyExcel;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hngy.exception.StudentException;
+import com.hngy.exception.UserException;
 import com.hngy.listener.*;
+import com.hngy.mapper.AdminMapper;
 import com.hngy.mapper.ClassesMapper;
 import com.hngy.mapper.StudentMapper;
 import com.hngy.mapper.TeacherMapper;
@@ -36,6 +38,8 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private ClassesMapper classesMapper;
 
+    @Autowired
+    private AdminMapper adminMapper;
 
     @Override
     public ResultVO<?> addStudent(Student student) {
@@ -94,5 +98,14 @@ public class AdminServiceImpl implements AdminService {
         PageHelper.startPage(page, rows);
         List<Classes> classes = classesMapper.listAll();
         return new PageInfo<>(classes);
+    }
+
+    @Override
+    public ResultVO<?> changePassword(String username, String oldPassword, String newPassword) {
+        int i = adminMapper.changePassword(username, oldPassword, newPassword);
+        if (i == 0){
+            throw new UserException("旧密码不正确!");
+        }
+        return ResultVO.ok("密码修改成功!");
     }
 }

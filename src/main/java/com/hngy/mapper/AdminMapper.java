@@ -2,11 +2,10 @@ package com.hngy.mapper;
 
 
 import com.hngy.model.Admin;
+import org.apache.ibatis.annotations.Param;
 
 public interface AdminMapper {
- 
-	Admin findAdminByUserName(String username) throws Exception;
-	
-	void changePassword(Admin admin) throws Exception;
+
+	int changePassword(@Param("username") String username,@Param("password") String password,@Param("newPassword") String newPassword);
 
 }

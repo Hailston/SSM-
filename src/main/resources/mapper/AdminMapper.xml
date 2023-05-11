@@ -2,13 +2,9 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hngy.mapper.AdminMapper">
 
-   <!-- 查询管理员账号是否存在 -->
-   <select id="findAdminByUserName" parameterType="String" resultType="Admin">
-      select * from admin where username=#{username}
-   </select>
    
-   <update id="changePassword" parameterType="admin">
-      update admin set password=#{password} where username=#{username}
+   <update id="changePassword">
+      update admin set password=#{newPassword} where username=#{username} and password=#{password}
    </update>
  
 </mapper>
