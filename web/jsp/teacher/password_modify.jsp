@@ -1,15 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: liuwenxuan
-  Date: 2023/5/9
-  Time: 17:47
+  Date: 2023/5/12
+  Time: 19:49
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
-<head>
-    <title>修改密码</title>
+<head><title>修改密码</title>
     <style type=text/css>
         BODY {
             MARGIN-LEFT: 0px;
@@ -43,11 +42,11 @@
     <tbody>
     <tr>
         <td align="left" vAlign=top><br>
-            <form action="/admin/changePassword" method="post" name="form1" target="submitFrame">
+            <form action="/teacher/changePassword" method="post" name="form1" target="submitFrame">
                 <table width='100%' cellspacing='1' cellpadding='3' bgcolor='#CCCCCC' class="tablewidth">
                     <tr>
                         <td align="right" width="35%">以前的密码:</td>
-                        <td width=65%><input name="oldPassword" type='password'/></td>
+                        <td width=65%><input name="oldPassword" type='password' /></td>
                     </tr>
                     <tr>
                         <td align="right" width="35%">输入新密码:</td>

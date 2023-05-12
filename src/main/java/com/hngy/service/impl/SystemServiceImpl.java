@@ -25,7 +25,7 @@ public class SystemServiceImpl implements SystemService {
         if ("student".equals(identify)) {
 //            systemMapper.loginStudent(username, password) != null
         } else if ("teacher".equals(identify)) {
-//            systemMapper.loginTeacher(username, password) != null
+            flag = Objects.isNull(systemMapper.loginTeacher(username, password)) ? null : "/teacher/index";
         } else if ("admin".equals(identify)) {
             flag = Objects.isNull(systemMapper.loginAdmin(username, password))? null : "/admin/index";
         }

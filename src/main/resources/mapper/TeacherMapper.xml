@@ -34,10 +34,16 @@
 	<select id="getTeacher" parameterType="string" resultMap="teacherMap">
 		select * from t_teacher where t_teacher.teacherNumber = #{teacherNumber}
 	</select>
+    <select id="selectOneByTno" resultType="teacher">
+		select * from teacher where tno=#{tno}
+	</select>
 
-	<!-- 更新教师信息记录 -->
+    <!-- 更新教师信息记录 -->
 	<update id="updateTeacher" parameterType="teacher">
-		update t_teacher set teacherName=#{teacherName},teacherPassword=#{teacherPassword},teacherSex=#{teacherSex},teacherBirthday=#{teacherBirthday},teacherArriveDate=#{teacherArriveDate},teacherCardNumber=#{teacherCardNumber},teacherPhone=#{teacherPhone},teacherPhoto=#{teacherPhoto},teacherAddress=#{teacherAddress},teacherMemo=#{teacherMemo} where teacherNumber = #{teacherNumber}
+		update teacher set age=#{age},email=#{email},tel=#{tel} where tno = #{tno}
+	</update>
+	<update id="changePassword">
+		update teacher set password=#{newPassword} where tno=#{tno} and password=#{oldPassword}
 	</update>
 
 	<!-- 删除教师信息记录 -->
