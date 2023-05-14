@@ -59,14 +59,14 @@ $(function () {
                     text: "其它",
                     state: "closed",
                     iconCls: "icon-system",
-                    children:
-                        [
-                            {
-                                text: "修改密码",
-                                state: "open",
-                                url: "/jsp/admin/password_modify.jsp"
-                            }
-                        ]
+                    // children:
+                    //     [
+                    //         {
+                    //             text: "修改密码",
+                    //             state: "open",
+                    //             url: "/jsp/admin/password_modify.jsp"
+                    //         }
+                    //     ]
                 }],
         onClick: function (node) {
             if (node.url) {

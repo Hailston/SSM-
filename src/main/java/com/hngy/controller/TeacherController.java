@@ -85,7 +85,7 @@ public class TeacherController {
         return map;
     }
 
-    @GetMapping("/require/{courseId}/student")
+    @GetMapping("/course/{courseId}/student")
     @ResponseBody
     public ResultVO<List<StudentClasses>> getStudent(@PathVariable("courseId")Integer courseId){
         return teacherService.getRequireStudent(courseId);
@@ -94,6 +94,7 @@ public class TeacherController {
     @PostMapping("/score")
     @ResponseBody
     public ResultVO<?> score(@RequestBody List<StudentClasses> scores){
+        scores.forEach(System.out::println);
         return teacherService.enterScore(scores);
     }
 
@@ -107,4 +108,5 @@ public class TeacherController {
         map.put("rows", pageInfo.getList());
         return map;
     }
+
 }

@@ -3,8 +3,8 @@ const endEditing = () => {
     if (editIndex == undefined) {
         return true
     }
-    if ($('#student_score').datagrid('validateRow', editIndex)) {
-        $('#student_score').datagrid('endEdit', editIndex);
+    if ($('#elective_student_score').datagrid('validateRow', editIndex)) {
+        $('#elective_student_score').datagrid('endEdit', editIndex);
         editIndex = undefined;
         return true;
     } else {
@@ -14,17 +14,17 @@ const endEditing = () => {
 const onClickRow = (index) => {
     if (editIndex != index) {
         if (endEditing()) {
-            $('#student_score').datagrid('selectRow', index)
+            $('#elective_student_score').datagrid('selectRow', index)
                 .datagrid('beginEdit', index);
             editIndex = index;
         } else {
-            $('#student_score').datagrid('selectRow', editIndex);
+            $('#elective_student_score').datagrid('selectRow', editIndex);
         }
     }
 }
 
 const initScoreTable = (data) => {
-    $("#student_score").datagrid({
+    $("#elective_student_score").datagrid({
         data: data.data,
         fit: true,
         fitColumns: true,
@@ -61,18 +61,18 @@ const initScoreTable = (data) => {
     });
 }
 
-var require_manage_tool = {
+var elective_manage_tool = {
     reload: function () {
-        $("#require_course_manage").datagrid("reload");
+        $("#elective_course_manage").datagrid("reload");
     },
     search: function () {
         // TODO 搜索课程
     },
     save: () => {
-        $('#student_score').datagrid('endEdit', editIndex);
+        $('#elective_student_score').datagrid('endEdit', editIndex);
     },
     enterScore: () => {
-        const rows = $("#require_course_manage").datagrid("getSelections");
+        const rows = $("#elective_course_manage").datagrid("getSelections");
         if (rows.length === 1) {
             $.ajax({
                 url: "/teacher/course/" + rows[0].id + "/student",
@@ -88,7 +88,7 @@ var require_manage_tool = {
                     $.messager.progress("close");
                     if (data.success) {
                         initScoreTable(data);
-                        $("#enter_score_dialog").dialog("open");
+                        $("#enter_elective_score_dialog").dialog("open");
                     } else {
                         $.messager.alert("获取失败！", "未知错误导致失败，请重试！", "warning");
                     }
@@ -102,8 +102,8 @@ var require_manage_tool = {
 
 $(() => {
 
-    $("#require_course_manage").datagrid({
-        url: '/teacher/require/page',
+    $("#elective_course_manage").datagrid({
+        url: '/teacher/elective/page',
         fit: true,
         fitColumns: true,
         striped: true,
@@ -116,7 +116,7 @@ $(() => {
         pageNumber: 1,
         sortName: "id",
         sortOrder: "desc",
-        toolbar: "#require_course_manage_tool",
+        toolbar: "#elective_course_manage_tool",
         columns: [[
             {
                 field: "id",
@@ -151,7 +151,7 @@ $(() => {
         ]],
     });
 
-    $("#enter_score_dialog").dialog({
+    $("#enter_elective_score_dialog").dialog({
         title: "成绩录入",
         top: "50px",
         width: 400,
@@ -164,8 +164,8 @@ $(() => {
                 text: "提交",
                 iconCls: "icon-edit-new",
                 handler: () => {
-                    const data = $("#student_score").datagrid('getData');
-                    console.log(data.rows)
+                    const data = $("#elective_student_score").datagrid('getData');
+                    console.log(data)
                     $.ajax({
                         url: "/teacher/score",
                         type: "post",
@@ -180,7 +180,7 @@ $(() => {
                         success: (data) => {
                             $.messager.progress("close");
                             if (data.success) {
-                                $("#enter_score_dialog").dialog("close");
+                                $("#enter_elective_score_dialog").dialog("close");
                                 $.messager.alert("成功", "提交成功", "success");
                             } else {
                                 $.messager.alert("获取失败！", "未知错误导致失败，请重试！", "warning");
@@ -193,7 +193,7 @@ $(() => {
                 text: "取消",
                 iconCls: "icon-redo",
                 handler: function () {
-                    $("#enter_score_dialog").dialog("close");
+                    $("#enter_elective_score_dialog").dialog("close");
                 },
             }
         ],

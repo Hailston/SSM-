@@ -76,4 +76,5 @@ public class TeacherServiceImpl implements TeacherService {
         List<Classes> classes = teacherMapper.selectCourseByCtype(tno, 2);
         return new PageInfo<>(classes);
     }
+
 }
