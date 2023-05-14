@@ -57,6 +57,11 @@ $(function () {
                 title : "课程学分",
                 width : 70,
             },
+            {
+                field : "ctype",
+                title : "课程类别",
+                width : 70,
+            },
         ]],
     });
 

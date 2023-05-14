@@ -25,4 +25,6 @@ public class Classes {
     private String cmark;
     @ExcelProperty("课程名称")
     private String cname;
+    @ExcelProperty("课程类别")
+    private Integer ctype;
 }
