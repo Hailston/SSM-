@@ -16,4 +16,6 @@ public interface ClassesMapper {
     void insertBatch(@Param("classes") List<Classes> cachedDataList);
 
     List<Classes> listAll();
+
+    int countStudent(@Param("courseId") Integer courseId);
 }

@@ -1,6 +1,10 @@
 package com.hngy.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.hngy.exception.UserException;
+import com.hngy.model.Classes;
+import com.hngy.model.Student;
+import com.hngy.model.StudentClasses;
 import com.hngy.model.Teacher;
 import com.hngy.service.TeacherService;
 import com.hngy.vo.ResultVO;
@@ -8,12 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.*;
 
 /**
  * @name: TeacherController
@@ -70,5 +72,39 @@ public class TeacherController {
         String username = (String) session.getAttribute("username");
         // TODO 教师密码修改接口返回到前端的JSON数据未被处理
         return teacherService.changePassword(username, oldPassword, newPassword);
+    }
+
+    @PostMapping("/require/page")
+    @ResponseBody
+    public Map<String, Object> pageRequireCourse(Integer page, Integer rows, HttpSession session) {
+        String tno = (String) session.getAttribute("username");
+        PageInfo<Classes> pageInfo = teacherService.pageRequireCourse(tno , page, rows);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("total", pageInfo.getTotal());
+        map.put("rows", pageInfo.getList());
+        return map;
+    }
+
+    @GetMapping("/require/{courseId}/student")
+    @ResponseBody
+    public ResultVO<List<StudentClasses>> getStudent(@PathVariable("courseId")Integer courseId){
+        return teacherService.getRequireStudent(courseId);
+    }
+
+    @PostMapping("/score")
+    @ResponseBody
+    public ResultVO<?> score(@RequestBody List<StudentClasses> scores){
+        return teacherService.enterScore(scores);
+    }
+
+    @PostMapping("/elective/page")
+    @ResponseBody
+    public Map<String, Object> pageElectiveCourse(Integer page, Integer rows, HttpSession session) {
+        String tno = (String) session.getAttribute("username");
+        PageInfo<Classes> pageInfo = teacherService.pageElectiveCourse(tno , page, rows);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("total", pageInfo.getTotal());
+        map.put("rows", pageInfo.getList());
+        return map;
     }
 }

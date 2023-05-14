@@ -21,4 +21,7 @@
     <select id="listAll" resultType="classes">
         select * from classes
     </select>
+    <select id="countStudent" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM student_classes WHERE student_classes.cs_id=#{courseId}
+    </select>
 </mapper>

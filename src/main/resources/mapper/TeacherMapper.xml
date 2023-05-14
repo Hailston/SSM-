@@ -1,54 +1,94 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hngy.mapper.TeacherMapper">
-	<!-- 添加教师信息记录 -->
-	<insert id="addTeacher" parameterType="teacher">
-		insert into teacher(tno, tname, age, email, tel, password, teaType) values
-		(#{tno},#{tname},#{age},#{email},#{tel},#{password},#{teaType})
-	</insert>
-	<insert id="insertBatch">
-		insert into teacher(tno, tname, age, email, tel, teaType) values
-		<foreach collection="teachers" item="item" separator=",">
-			(#{item.tno},#{item.tname},#{item.age},#{item.email},#{item.tel},#{item.teaType})
-		</foreach>
-	</insert>
+    <!-- 添加教师信息记录 -->
+    <insert id="addTeacher" parameterType="teacher">
+        insert into teacher(tno, tname, age, email, tel, password, teaType)
+        values (#{tno}, #{tname}, #{age}, #{email}, #{tel}, #{password}, #{teaType})
+    </insert>
+    <insert id="insertBatch">
+        insert into teacher(tno, tname, age, email, tel, teaType) values
+        <foreach collection="teachers" item="item" separator=",">
+            (#{item.tno},#{item.tname},#{item.age},#{item.email},#{item.tel},#{item.teaType})
+        </foreach>
+    </insert>
 
-	<!-- 按照查询条件分页查询教师信息记录 -->
-	<select id="listAll" resultMap="teacherMap" >
-		select * from teacher
-	</select>
-	<resultMap id="teacherMap" type="teacher">
-        <id property="teacherNumber" column="teacherNumber" />
+    <!-- 按照查询条件分页查询教师信息记录 -->
+    <select id="listAll" resultMap="teacherMap">
+        select *
+        from teacher
+    </select>
+    <resultMap id="teacherMap" type="teacher">
+        <id property="teacherNumber" column="teacherNumber"/>
     </resultMap>
 
     <!-- 按照查询条件查询所有教师信息记录 -->
-	<select id="queryTeacherList" resultMap="teacherMap" >
-		select t_teacher.* from t_teacher ${where}
-	</select>
+    <select id="queryTeacherList" resultMap="teacherMap">
+        select t_teacher.*
+        from t_teacher ${where}
+    </select>
 
     <!-- 按照查询条件的教师信息记录数 -->
-	<select id="queryTeacherCount" resultType="int">
-		select count(*) from t_teacher ${where}
-	</select>
+    <select id="queryTeacherCount" resultType="int">
+        select count(*)
+        from t_teacher ${where}
+    </select>
 
-	<!-- 根据主键查询某个教师信息记录 -->
-	<select id="getTeacher" parameterType="string" resultMap="teacherMap">
-		select * from t_teacher where t_teacher.teacherNumber = #{teacherNumber}
-	</select>
+    <!-- 根据主键查询某个教师信息记录 -->
+    <select id="getTeacher" parameterType="string" resultMap="teacherMap">
+        select *
+        from t_teacher
+        where t_teacher.teacherNumber = #{teacherNumber}
+    </select>
     <select id="selectOneByTno" resultType="teacher">
-		select * from teacher where tno=#{tno}
-	</select>
+        select *
+        from teacher
+        where tno = #{tno}
+    </select>
+    <resultMap id="listCourse" type="classes">
+        <result property="id" column="id"/>
+        <association property="chooseCurNum" column="id" select="com.hngy.mapper.ClassesMapper.countStudent"/>
+    </resultMap>
+    <select id="selectCourseByCtype" resultMap="listCourse">
+        select *
+        from classes
+        where teacher_id = #{tno}
+          and ctype = #{ctype}
+    </select>
+
+    <select id="selectRequireCourseStudent" resultType="studentClasses">
+        SELECT sno, username, cs_id, cscore
+        FROM student_classes as sc
+                 LEFT JOIN student as s ON sc.st_id = s.sno
+        WHERE sc.cs_id = #{courseId}
+    </select>
 
     <!-- 更新教师信息记录 -->
-	<update id="updateTeacher" parameterType="teacher">
-		update teacher set age=#{age},email=#{email},tel=#{tel} where tno = #{tno}
-	</update>
-	<update id="changePassword">
-		update teacher set password=#{newPassword} where tno=#{tno} and password=#{oldPassword}
-	</update>
+    <update id="updateTeacher" parameterType="teacher">
+        update teacher
+        set age=#{age},
+            email=#{email},
+            tel=#{tel}
+        where tno = #{tno}
+    </update>
 
-	<!-- 删除教师信息记录 -->
-	<delete id="deleteTeacher" parameterType="string">
-		delete from t_teacher where teacherNumber=#{teacherNumber}
-	</delete>
+    <update id="updateBatchScore">
+        <foreach collection="scores" item="item" separator=";">
+            update student_classes set cscore=#{item.cscore} where st_id=#{item.sno} and cs_id=#{item.csId}
+        </foreach>
+    </update>
+
+    <update id="changePassword">
+        update teacher
+        set password=#{newPassword}
+        where tno = #{tno}
+          and password = #{oldPassword}
+    </update>
+
+    <!-- 删除教师信息记录 -->
+    <delete id="deleteTeacher" parameterType="string">
+        delete
+        from t_teacher
+        where teacherNumber = #{teacherNumber}
+    </delete>
 
 </mapper>

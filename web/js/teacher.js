@@ -13,29 +13,30 @@ $(function () {
         },
 
         data:
-            [{
-                text: "个人信息",
-                state: "closed",
-                iconCls: "icon-system",
-                children:
-                    [
-                        {
-                            text: "基本资料",
-                            state: "open",
-                            url: "/teacher/info"
-                        },
-                        {
-                            text: "修改信息",
-                            state: "open",
-                            url: "/teacher/infoEdit"
-                        },
-                        {
-                            text: "修改密码",
-                            state: "open",
-                            url: "/jsp/teacher/password_modify.jsp"
-                        }
-                    ]
-            }, {
+            [
+                {
+                    text: "个人信息",
+                    state: "closed",
+                    iconCls: "icon-system",
+                    children:
+                        [
+                            {
+                                text: "基本资料",
+                                state: "open",
+                                url: "/teacher/info"
+                            },
+                            {
+                                text: "修改信息",
+                                state: "open",
+                                url: "/teacher/infoEdit"
+                            },
+                            {
+                                text: "修改密码",
+                                state: "open",
+                                url: "/jsp/teacher/password_modify.jsp"
+                            }
+                        ]
+                }, {
                 text: "我的课程",
                 state: "closed",
                 iconCls: "icon-system",
@@ -44,12 +45,12 @@ $(function () {
                         {
                             text: "必修课",
                             state: "open",
-                            url: "/jsp/admin/teacher_add.jsp"
+                            url: "/jsp/teacher/require_course.jsp"
                         },
                         {
                             text: "选修课",
                             state: "open",
-                            url: "/jsp/admin/teacher_query_result.jsp"
+                            url: "/jsp/teacher/elective_course.jsp"
                         }
                     ]
             },
