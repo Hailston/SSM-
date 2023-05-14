@@ -12,10 +12,10 @@
     </insert>
 
     <insert id="insertBatch">
-        insert into classes(teacher_id, choose_max, choose_cur_num, room, cour_time, cmark, cname)
+        insert into classes(teacher_id, choose_max, choose_cur_num, room, cour_time, cmark, cname,ctype)
         values
         <foreach collection="classes" item="item" separator=",">
-            (#{item.teacherId}, #{item.chooseMax}, #{item.chooseCurNum}, #{item.room}, #{item.courTime}, #{item.cmark}, #{item.cname})
+            (#{item.teacherId}, #{item.chooseMax}, #{item.chooseCurNum}, #{item.room}, #{item.courTime}, #{item.cmark}, #{item.cname},#{item.ctype})
         </foreach>
     </insert>
     <select id="listAll" resultType="classes">
