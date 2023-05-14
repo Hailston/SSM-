@@ -22,7 +22,7 @@ public interface StudentMapper {
 	int queryStudentCount(@Param("where") String where) throws Exception; 
 
 	/*根据主键查询某条学生信息记录*/
-	Student getStudent(String studentNumber) throws Exception;
+	Student getStudent(@Param("sno") String sno);
 
 	/*更新学生信息记录*/
 	void updateStudent(Student student) throws Exception;
@@ -30,4 +30,6 @@ public interface StudentMapper {
 	/*删除学生信息记录*/
 	void deleteStudent(String studentNumber) throws Exception;
 	int insertBatch(@Param("students") List<StudentData> studentData);
+
+	int changePassword(@Param("sno") String sno, @Param("oldPassword") String oldPassword,@Param("newPassword") String newPassword);
 }

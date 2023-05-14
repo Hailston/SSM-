@@ -10,7 +10,7 @@
     </select>
     <!--    Student loginStudent(@Param("username") String username, @Param("password") String password);-->
     <select id="loginStudent" resultType="student">
-        select * from t_student where studentNumber=#{username} and password=#{password}
+        select * from student where sno=#{username} and password=#{password}
     </select>
     <!--    Teacher loginTeacher(@Param("username") String username, @Param("password") String password);-->
     <select id="loginTeacher" resultType="teacher">
