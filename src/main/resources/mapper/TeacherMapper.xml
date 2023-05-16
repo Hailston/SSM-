@@ -13,7 +13,7 @@
     </insert>
 
 
-    <select id="listAll" resultMap="teacherMap">
+    <select id="listAll" resultType="teacher">
         select *
         from teacher
     </select>

@@ -30,4 +30,6 @@ public interface TeacherMapper {
 	List<StudentClasses> selectRequireCourseStudent(@Param("courseId") Integer courseId);
 
 	int updateBatchScore(@Param("scores") List<StudentClasses> scores);
+
+	int updateTeacher(Teacher teacher);
 }

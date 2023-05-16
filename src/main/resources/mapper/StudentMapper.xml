@@ -39,10 +39,12 @@
             AND cname like concat('%',#{cname},'%')
         </if>
     </select>
+
     <resultMap id="studentElectiveCourse" type="studentElectiveCourse">
         <result property="id" column="id"/>
         <association property="chooseCurNum" column="id" select="com.hngy.mapper.ClassesMapper.countStudent"/>
     </resultMap>
+
     <select id="getElectiveCourse" resultMap="studentElectiveCourse">
         SELECT
             *

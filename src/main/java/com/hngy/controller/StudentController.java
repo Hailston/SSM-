@@ -64,9 +64,7 @@ public class StudentController {
     @ResponseBody
     public Map<String, Object> pageRequire(Integer page, Integer rows, @RequestParam(value = "keyword", required = false) String cname, HttpSession session) {
         String sno = (String) session.getAttribute("username");
-
         PageInfo<StudentCourseInfo> pageInfo = studentService.pageRequireCourse(sno, cname, page, rows);
-
         HashMap<String, Object> map = new HashMap<>();
         map.put("total", pageInfo.getTotal());
         map.put("rows", pageInfo.getList());

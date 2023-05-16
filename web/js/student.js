@@ -38,11 +38,6 @@ $(function () {
                 children:
                     [
                         {
-                            text: "选课",
-                            state: "open",
-                            url: "/jsp/student/select_course.jsp"
-                        },
-                        {
                             text: "必修课",
                             state: "open",
                             url: "/jsp/student/require_course.jsp"
