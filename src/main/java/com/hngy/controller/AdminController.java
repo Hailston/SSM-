@@ -14,10 +14,7 @@ import com.hngy.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -60,15 +57,14 @@ public class AdminController {
             File file = new File(uploadDirectory + File.separator + fileName);
             studentPhotoFile.transferTo(file);
             student.setImage("/upload/" + fileName);
-
         }
         return adminService.addStudent(student);
     }
 
     @PostMapping("/student/list")
     @ResponseBody
-    public Map<String, Object> listStudent(Integer page, Integer rows) throws IOException {
-        PageInfo<Student> pageInfo = adminService.pageStudent(page, rows);
+    public Map<String, Object> listStudent(Integer page, Integer rows, @RequestParam(value = "keyword", required = false)String keyword) throws IOException {
+        PageInfo<Student> pageInfo = adminService.pageStudent(page, rows, keyword);
         HashMap<String, Object> map = new HashMap<>();
         map.put("total", pageInfo.getTotal());
         map.put("rows", pageInfo.getList());

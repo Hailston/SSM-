@@ -35,7 +35,15 @@
 				<input class="textbox" type="text" id="chooseMax" name="chooseMax" style="width:auto" />
 			</span>
         </div>
-
+        <div>
+            <span class="label">课程类别:</span>
+            <span class="inputControl">
+				<select class="textbox" name="ctype">
+                    <option value="1" selected>必修课</option>
+                    <option value="2">选修课</option>
+                </select>
+			</span>
+        </div>
         <div>
             <span class="label">上课时间:</span>
             <span class="inputControl">

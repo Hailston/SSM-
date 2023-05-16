@@ -9,7 +9,17 @@ $(function () {
         missingMessage : '请输入教师姓名',
     });
 
+    $('#age').validatebox({
+        validType:'age'
+    })
 
+    $('#tel').validatebox({
+        validType:'phone'
+    })
+
+    $('#email').validatebox({
+        validType:'email'
+    })
 
     //单击添加按钮
     $("#teacherAddButton").click(function () {

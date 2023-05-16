@@ -17,7 +17,6 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-export" plain="true"
                onclick="student_manage_tool.importExcel();">导入excel</a>
         </form>
-        <%--        <a href="#" class="easyui-linkbutton" iconCls="icon-export" plain="true" onclick="student_manage_tool.exportExcel();">导出到excel</a>--%>
     </div>
     <div style="padding:0 0 0 7px;color:#333;">
         <form id="studentQueryForm" method="post">

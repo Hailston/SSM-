@@ -17,7 +17,7 @@ import java.io.IOException;
 public interface AdminService {
 
     ResultVO<?> addStudent(Student student);
-    PageInfo<Student> pageStudent(Integer page, Integer rows);
+    PageInfo<Student> pageStudent(Integer page, Integer rows, String sname);
 
     void importStudentExcel(MultipartFile file) throws IOException;
 

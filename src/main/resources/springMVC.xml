@@ -10,16 +10,17 @@
        http://www.springframework.org/schema/mvc
        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:property-placeholder location="classpath:jdbc.properties" />
+    <context:property-placeholder location="classpath:jdbc.properties"/>
 
-    <mvc:annotation-driven />
-    <mvc:default-servlet-handler />
+    <mvc:annotation-driven/>
+    <mvc:default-servlet-handler/>
 
-    <context:component-scan base-package="com.hngy.service.impl" />
-    <context:component-scan base-package="com.hngy.controller" />
-    <context:component-scan base-package="com.hngy.interceptor" />
+    <context:component-scan base-package="com.hngy.service.impl"/>
+    <context:component-scan base-package="com.hngy.controller"/>
+    <context:component-scan base-package="com.hngy.interceptor"/>
+    <context:component-scan base-package="com.hngy.handle"/>
 
-    <bean id="multipartResolver"  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- 设置上传文件的最大尺寸为2MB -->
         <property name="maxUploadSize">
             <value>2097152</value>
@@ -33,30 +34,30 @@
             <mvc:exclude-mapping path="/css/**"/>
             <mvc:exclude-mapping path="/easyui/**"/>
             <mvc:exclude-mapping path="/js/**"/>
-            <ref bean="authInterceptor" />
+            <ref bean="authInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/jsp/" />
-        <property name="suffix" value=".jsp" />
+        <property name="prefix" value="/jsp/"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
 
     <!--    数据配置-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-        <property name="driverClassName" value="${jdbc.driver}" />
-        <property name="url" value="${jdbc.url}" />
-        <property name="username" value="${jdbc.username}" />
-        <property name="password" value="${jdbc.password}" />
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
     </bean>
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="mapperLocations" value="classpath:mapper/*.xml" />
-        <property name="configLocation" value="classpath:mybatis-config.xml" />
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
     </bean>
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.hngy.mapper" />
+        <property name="basePackage" value="com.hngy.mapper"/>
     </bean>
     <bean id="exceptionResolver"
           class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
@@ -65,5 +66,9 @@
                 <prop key="com.hngy.exception.UserException">user_error</prop>
             </props>
         </property>
+    </bean>
+    <!-- 事务管理 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 </beans>

@@ -13,6 +13,7 @@ $(function () {
         striped : true,
         rownumbers : true,
         border : false,
+        singleSelect: true,
         pagination : true,
         pageSize : 5,
         pageList : [5, 10, 15, 20, 25],

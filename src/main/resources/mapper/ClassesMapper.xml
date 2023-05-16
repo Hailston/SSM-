@@ -7,8 +7,8 @@
 
 
     <insert id="addClasses">
-        insert into classes(teacher_id, choose_max, choose_cur_num, room, cour_time, cmark, cname)
-        values (#{teacherId}, #{chooseMax}, #{chooseCurNum}, #{room}, #{courTime}, #{cmark}, #{cname})
+        insert into classes(teacher_id, choose_max, choose_cur_num, room, cour_time, cmark, cname, ctype)
+        values (#{teacherId}, #{chooseMax}, #{chooseCurNum}, #{room}, #{courTime}, #{cmark}, #{cname}, #{ctype})
     </insert>
 
     <insert id="insertBatch">
@@ -18,7 +18,11 @@
             (#{item.teacherId}, #{item.chooseMax}, #{item.chooseCurNum}, #{item.room}, #{item.courTime}, #{item.cmark}, #{item.cname},#{item.ctype})
         </foreach>
     </insert>
-    <select id="listAll" resultType="classes">
+    <resultMap id="listCourse" type="classes">
+        <result property="id" column="id"/>
+        <association property="chooseCurNum" column="id" select="com.hngy.mapper.ClassesMapper.countStudent"/>
+    </resultMap>
+    <select id="listAll" resultMap="listCourse">
         select * from classes
     </select>
     <select id="countStudent" resultType="java.lang.Integer">

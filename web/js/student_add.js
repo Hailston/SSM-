@@ -23,7 +23,7 @@ $(function () {
     });
 
     //单击添加按钮
-    $("#studentAddButton").click(function () {
+    $("#studentAddButton").click(() => {
         //验证表单
         if (!$("#studentAddForm").form("validate")) {
             $.messager.alert("错误提示", "你输入的信息还有错误！", "warning");

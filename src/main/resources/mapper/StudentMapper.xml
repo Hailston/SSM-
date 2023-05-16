@@ -14,13 +14,17 @@
         </foreach>
     </insert>
     <insert id="insertStudentClasses">
-        insert into student_classes(st_id, cs_id) values(#{sno}, #{courseId})
+        insert into student_classes(st_id, cs_id)
+        values (#{sno}, #{courseId})
     </insert>
 
 
     <select id="listAll" resultType="student">
         select *
         from student
+        <if test="sname!=null">
+            where username like concat('%',#{sname},'%')
+        </if>
     </select>
 
     <select id="getStudent" resultType="student">
@@ -46,21 +50,13 @@
     </resultMap>
 
     <select id="getElectiveCourse" resultMap="studentElectiveCourse">
-        SELECT
-            *
-        FROM
-            classes c
-                LEFT JOIN teacher t ON c.teacher_id = t.tno
-        WHERE
-            ctype = 2
-          AND c.id NOT IN (
-            SELECT
-                cs_id
-            FROM
-                student_classes sc
-            WHERE
-                sc.st_id = #{sno}
-        )
+        SELECT *
+        FROM classes c
+                 LEFT JOIN teacher t ON c.teacher_id = t.tno
+        WHERE ctype = 2
+          AND c.id NOT IN (SELECT cs_id
+                           FROM student_classes sc
+                           WHERE sc.st_id = #{sno})
     </select>
 
     <update id="changePassword">

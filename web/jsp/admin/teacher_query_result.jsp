@@ -5,7 +5,7 @@
 <div id="teacher_manage_tool" style="padding:5px;">
     <div style="margin-bottom:5px;">
         <form id="teacherImport" method="post" enctype="multipart/form-data">
-            <input id="fb" type="text" name="file" style="width:200px">
+            <input id="fb" name="file" style="width:200px">
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-export" plain="true"
                onclick="teacher_manage_tool.importExcel();">导入excel</a>
         </form>

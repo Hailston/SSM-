@@ -3,6 +3,7 @@ package com.hngy.service.impl;
 import com.alibaba.excel.EasyExcel;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hngy.exception.AdminException;
 import com.hngy.exception.StudentException;
 import com.hngy.exception.UserException;
 import com.hngy.listener.*;
@@ -17,6 +18,7 @@ import com.hngy.service.AdminService;
 import com.hngy.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -47,19 +49,20 @@ public class AdminServiceImpl implements AdminService {
             studentMapper.addStudent(student);
         }catch (Exception e){
             e.printStackTrace();
-            throw new StudentException("添加失败!");
+            throw new AdminException("添加失败!");
         }
         return ResultVO.ok("添加成功");
     }
 
     @Override
-    public PageInfo<Student> pageStudent(Integer page, Integer rows) {
+    public PageInfo<Student> pageStudent(Integer page, Integer rows, String sname) {
         PageHelper.startPage(page, rows);
-        List<Student> students = studentMapper.listAll();
+        List<Student> students = studentMapper.listAll(sname);
         return new PageInfo<>(students);
     }
 
     @Override
+    @Transactional
     public void importStudentExcel(MultipartFile file) throws IOException {
         EasyExcel.read(file.getInputStream(), StudentData.class, new StudentDataListener(studentMapper)).sheet().doRead();
     }
@@ -78,6 +81,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    @Transactional
     public void importTeacherExcel(MultipartFile file) throws IOException {
         EasyExcel.read(file.getInputStream(), TeacherData.class, new TeacherDataListener(teacherMapper)).sheet().doRead();
     }
@@ -89,6 +93,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    @Transactional
     public void importClassesExcel(MultipartFile file) throws IOException {
         EasyExcel.read(file.getInputStream(), Classes.class, new ClassesDataListener(classesMapper)).sheet().doRead();
     }

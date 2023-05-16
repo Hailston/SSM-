@@ -73,5 +73,3 @@ public class StudentDataListener implements ReadListener<StudentData> {
         log.info("存储数据库成功！");
     }
 }
-
-

@@ -118,10 +118,10 @@ $(function () {
             message: "输入内容长度必须介于{0}和{1}之间."
         },
         phone: {// 验证电话号码
-            validator: function (value) {
-                return /^((\d2,3)|(\d{3}\-))?(0\d2,3|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$/i.test(value);
+            validator: (value) => {
+                return /^1[3-9]\d{9}$/i.test(value);
             },
-            message: '格式不正确,请使用下面格式:020-88888888'
+            message: '格式不正确,请使用下面格式:17674128515'
         },
         mobile: {// 验证手机号码
             validator: function (value) {

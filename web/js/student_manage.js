@@ -14,6 +14,7 @@ $(function () {
         rownumbers : true,
         border : false,
         pagination : true,
+        singleSelect: true,
         pageSize : 5,
         pageList : [5, 10, 15, 20, 25],
         pageNumber : 1,
@@ -87,11 +88,9 @@ function initStudentManageTool() {
         },
         search: function() {
             var queryParams = $("#student_manage").datagrid("options").queryParams;
-            queryParams["studentNumber"] = $("#studentNumber").val();
-            queryParams["studentName"] = $("#studentName").val();
-            queryParams["studentClassNumber.classNumber"] = $("#studentClassNumber_classNumber_query").combobox("getValue");
-            queryParams["studentBirthday"] = $("#studentBirthday").datebox("getValue");
-            $("#student_manage").datagrid("options").queryParams=queryParams;
+            queryParams["keyword"] = $("#studentName").val();
+
+            $("#student_manage").datagrid("options").queryParams = queryParams;
             $("#student_manage").datagrid("load");
         },
         importExcel: function() {

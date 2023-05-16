@@ -70,6 +70,7 @@ var require_manage_tool = {
     },
     save: () => {
         $('#student_score').datagrid('endEdit', editIndex);
+        editIndex = undefined;
     },
     enterScore: () => {
         const rows = $("#require_course_manage").datagrid("getSelections");

@@ -70,6 +70,7 @@ var elective_manage_tool = {
     },
     save: () => {
         $('#elective_student_score').datagrid('endEdit', editIndex);
+        editIndex = undefined;
     },
     enterScore: () => {
         const rows = $("#elective_course_manage").datagrid("getSelections");

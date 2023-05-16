@@ -15,7 +15,7 @@ public interface StudentMapper {
     void addStudent(Student student);
 
 
-    List<Student> listAll();
+    List<Student> listAll(@Param("sname")String sname );
 
 
     Student getStudent(@Param("sno") String sno);

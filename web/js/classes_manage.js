@@ -15,6 +15,7 @@ $(function () {
         rownumbers : true,
         border : false,
         pagination : true,
+        singleSelect: true,
         pageSize : 5,
         pageList : [5, 10, 15, 20, 25],
         pageNumber : 1,
