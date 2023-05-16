@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @name: StudentClasses
- * @author: liuwenxuan
+ * @author: 杨定康
  * @date: 2023-05-10 22:09
  **/
 @Data

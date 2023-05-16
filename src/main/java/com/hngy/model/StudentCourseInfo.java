@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * @name: StudentCourseInfo
- * @author: liuwenxuan
+ * @author: 伍允文
  * @date: 2023-05-15 10:33
  **/
 @Data

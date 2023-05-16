@@ -45,7 +45,10 @@ public class StudentController {
 
     @PostMapping("/changePassword")
     @ResponseBody
-    public ResultVO<?> changePassword(String oldPassword, String newPassword, String newPassword2, HttpSession session) {
+    public ResultVO<?> changePassword(String oldPassword,
+                                      String newPassword,
+                                      String newPassword2,
+                                      HttpSession session) {
         if (StringUtils.isEmpty(oldPassword)) {
             throw new UserException("请输入旧密码!");
         }

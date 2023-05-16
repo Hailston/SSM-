@@ -3,8 +3,8 @@ package com.hngy.model;
 import lombok.Data;
 
 /**
- * @name Student
- * @Author 伍允文
+ * @name Classes
+ * @Author 刘文选
  * @Date 2023/5/8
  **/
 @Data
