@@ -22,10 +22,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @name: AdminController
@@ -45,7 +47,21 @@ public class AdminController {
 
     @PostMapping("/student/add")
     @ResponseBody
-    public ResultVO<?> addStudent(Student student) {
+    public ResultVO<?> addStudent(Student student, MultipartFile studentPhotoFile, HttpSession session) throws IOException {
+        String realPath = session.getServletContext().getRealPath("/upload");
+        File uploadDirectory = new File(realPath);
+        if (!uploadDirectory.exists()) {
+            uploadDirectory.mkdirs();
+        }
+        if (!studentPhotoFile.isEmpty()) {
+            String suffix = studentPhotoFile.getOriginalFilename()
+                    .substring(studentPhotoFile.getOriginalFilename().lastIndexOf("."));
+            String fileName = UUID.randomUUID().toString() + suffix;
+            File file = new File(uploadDirectory + File.separator + fileName);
+            studentPhotoFile.transferTo(file);
+            student.setImage("/upload/" + fileName);
+
+        }
         return adminService.addStudent(student);
     }
 

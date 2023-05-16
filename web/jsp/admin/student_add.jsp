@@ -63,16 +63,16 @@
         <div>
             <span class="label">学分:</span>
             <span class="inputControl">
-                <input class="textbox" type="text" name="mark" />
+                <input class="textbox" type="text" id="mark" name="mark" />
 			</span>
         </div>
 
-<%--        <div>--%>
-<%--            <span class="label">学生照片:</span>--%>
-<%--            <span class="inputControl">--%>
-<%--				<input id="studentPhotoFile" name="studentPhotoFile" type="file" size="50" />--%>
-<%--			</span>--%>
-<%--        </div>--%>
+        <div>
+            <span class="label">学生照片:</span>
+            <span class="inputControl">
+				<input id="studentPhotoFile" name="studentPhotoFile" type="file" size="50" />
+			</span>
+        </div>
 
         <div>
             <span class="label">学生邮箱:</span>

@@ -20,5 +20,5 @@ public class Student {
     private String email;
     private String image;
     private String tel;
-    private String maxClasses;
+    private Integer maxClasses;
 }
