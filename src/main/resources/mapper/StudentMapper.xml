@@ -1,6 +1,6 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hngy.mapper.StudentMapper">
-    <!-- 添加学生信息记录 -->
+
     <insert id="addStudent">
         insert into student(sno, username, sex, password, department, jiguan, mark, email, image, tel, maxClasses)
         values (#{sno}, #{username}, #{sex}, #{password}, #{department}, #{jiguan}, #{mark}, #{email}, #{image}, #{tel},
@@ -9,8 +9,12 @@
     <insert id="insertBatch">
         insert into student(sno,username, sex, password, department, jiguan, mark, email, tel, maxClasses) values
         <foreach collection="students" item="item" separator=",">
-			(#{item.sno}, #{item.username}, #{item.sex}, #{item.password}, #{item.department},#{item.jiguan}, #{item.mark}, #{item.email}, #{item.tel},#{item.maxClasses})
+            (#{item.sno}, #{item.username}, #{item.sex}, #{item.password}, #{item.department},#{item.jiguan},
+            #{item.mark}, #{item.email}, #{item.tel},#{item.maxClasses})
         </foreach>
+    </insert>
+    <insert id="insertStudentClasses">
+        insert into student_classes(st_id, cs_id) values(#{sno}, #{courseId})
     </insert>
 
 
@@ -18,59 +22,50 @@
         select *
         from student
     </select>
-    <resultMap id="studentMap" type="student">
-        <id property="studentNumber" column="studentNumber"/>
-        <association property="studentClassNumber" column="studentClassNumber"
-                     select="com.chengxusheji.mapper.ClassInfoMapper.getClassInfo"/>
-    </resultMap>
 
-    <!-- 按照查询条件查询所有学生信息记录 -->
-    <select id="queryStudentList" resultMap="studentMap">
-        select t_student.*
-        from t_student,
-             t_classInfo ${where} and t_student.studentClassNumber = t_classInfo.classNumber
-    </select>
-
-    <!-- 按照查询条件的学生信息记录数 -->
-    <select id="queryStudentCount" resultType="int">
-        select count(*)
-        from t_student,
-             t_classInfo ${where} and t_student.studentClassNumber = t_classInfo.classNumber
-    </select>
-
-    <!-- 根据主键查询某个学生信息记录 -->
     <select id="getStudent" resultType="student">
         select *
         from student
         where sno = #{sno}
     </select>
 
-    <!-- 更新学生信息记录 -->
-    <update id="updateStudent" parameterType="student">
-        update t_student
-        set studentName=#{studentName},
-            studentPassword=#{studentPassword},
-            studentSex=#{studentSex},
-            studentClassNumber=#{studentClassNumber.classNumber},
-            studentBirthday=#{studentBirthday},
-            studentState=#{studentState},
-            studentPhoto=#{studentPhoto},
-            studentTelephone=#{studentTelephone},
-            studentEmail=#{studentEmail},
-            studentQQ=#{studentQQ},
-            studentAddress=#{studentAddress},
-            studentMemo=#{studentMemo}
-        where studentNumber = #{studentNumber}
-    </update>
-    <update id="changePassword">
-        update student set password=#{newPassword} where sno=#{sno} and password=#{oldPassword}
-    </update>
+    <select id="getStudentCourse" resultType="com.hngy.model.StudentCourseInfo">
+        SELECT *
+        FROM student_classes as sc
+        LEFT JOIN classes c ON sc.cs_id = c.id
+        WHERE st_id = #{sno}
+        AND ctype = #{ctype}
+        <if test="cname!=null">
+            AND cname like concat('%',#{cname},'%')
+        </if>
+    </select>
+    <resultMap id="studentElectiveCourse" type="studentElectiveCourse">
+        <result property="id" column="id"/>
+        <association property="chooseCurNum" column="id" select="com.hngy.mapper.ClassesMapper.countStudent"/>
+    </resultMap>
+    <select id="getElectiveCourse" resultMap="studentElectiveCourse">
+        SELECT
+            *
+        FROM
+            classes c
+                LEFT JOIN teacher t ON c.teacher_id = t.tno
+        WHERE
+            ctype = 2
+          AND c.id NOT IN (
+            SELECT
+                cs_id
+            FROM
+                student_classes sc
+            WHERE
+                sc.st_id = #{sno}
+        )
+    </select>
 
-    <!-- 删除学生信息记录 -->
-    <delete id="deleteStudent" parameterType="string">
-        delete
-        from t_student
-        where studentNumber = #{studentNumber}
-    </delete>
+    <update id="changePassword">
+        update student
+        set password=#{newPassword}
+        where sno = #{sno}
+          and password = #{oldPassword}
+    </update>
 
 </mapper>

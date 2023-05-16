@@ -38,14 +38,19 @@ $(function () {
                 children:
                     [
                         {
+                            text: "选课",
+                            state: "open",
+                            url: "/jsp/student/select_course.jsp"
+                        },
+                        {
                             text: "必修课",
                             state: "open",
-                            url: "/jsp/teacher/require_course.jsp"
+                            url: "/jsp/student/require_course.jsp"
                         },
                         {
                             text: "选修课",
                             state: "open",
-                            url: "/jsp/teacher/elective_course.jsp"
+                            url: "/jsp/student/elective_course.jsp"
                         }
                     ]
             },

@@ -5,31 +5,30 @@ import java.util.List;
 
 import com.hngy.listener.StudentData;
 import com.hngy.model.Student;
+import com.hngy.model.StudentCourseInfo;
+import com.hngy.model.StudentElectiveCourse;
 import org.apache.ibatis.annotations.Param;
 
 
 public interface StudentMapper {
-	/*添加学生信息信息*/
-	void addStudent(Student student);
 
-	/*按照查询条件分页查询学生信息记录*/
-	List<Student> listAll();
+    void addStudent(Student student);
 
-	/*按照查询条件查询所有学生信息记录*/
-	List<Student> queryStudentList(@Param("where") String where) throws Exception;
 
-	/*按照查询条件的学生信息记录数*/
-	int queryStudentCount(@Param("where") String where) throws Exception; 
+    List<Student> listAll();
 
-	/*根据主键查询某条学生信息记录*/
-	Student getStudent(@Param("sno") String sno);
 
-	/*更新学生信息记录*/
-	void updateStudent(Student student) throws Exception;
+    Student getStudent(@Param("sno") String sno);
 
-	/*删除学生信息记录*/
-	void deleteStudent(String studentNumber) throws Exception;
-	int insertBatch(@Param("students") List<StudentData> studentData);
+    void updateStudent(Student student) throws Exception;
 
-	int changePassword(@Param("sno") String sno, @Param("oldPassword") String oldPassword,@Param("newPassword") String newPassword);
+    int insertBatch(@Param("students") List<StudentData> studentData);
+
+    int changePassword(@Param("sno") String sno, @Param("oldPassword") String oldPassword, @Param("newPassword") String newPassword);
+
+    List<StudentCourseInfo> getStudentCourse(@Param("sno") String sno, @Param("cname") String cname, @Param("ctype") Integer ctype);
+
+    List<StudentElectiveCourse> getElectiveCourse(@Param("sno") String sno);
+
+    int insertStudentClasses(@Param("sno") String sno,@Param("courseId") Integer courseId);
 }
